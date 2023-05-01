@@ -1,0 +1,55 @@
+/*
+Samantha is an avid collector of lucky numbers. 
+She believes that each number has its own unique energy and can bring good luck if used correctly. 
+One day, she came across a new number that had a mysterious aura and she could not resist finding out more about it. 
+She heard that the number may fall within the digit combinations, so she decided to sum up all the four-digit even numbers and then keep adding the digits of the summation until a single digit is found to unlock its secrets. 
+Later, she must check again whether the single digit is odd or even. If odd, then you must say “Odd Found” otherwise you must return “Even found”. 
+Write a C program to help her in finding the mysterious number.
+*/
+
+#include <stdio.h>
+
+int getSumOfDigits(int num);
+int isOdd(int num);
+
+int main() {
+    int sum = 0;
+    int numCount = 0;
+
+    for(int i = 1000; i <= 9998; i += 2) {
+
+        sum += i;
+        numCount++;
+    }
+
+    while(sum > 9) {
+        sum = getSumOfDigits(sum);
+    }
+
+    if(isOdd(sum)) {
+        printf("Odd Found\n");
+    } else {
+        printf("Even Found\n");
+    }
+    
+    printf("Total even four-digit numbers: %d", numCount);
+    
+    return 0;
+}
+
+int getSumOfDigits(int num) {
+    int sum = 0;
+    while(num > 0) {
+        sum += num % 10;
+        num /= 10;
+    }
+    return sum;
+}
+
+int isOdd(int num) {
+    if(num % 2 == 1) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
